@@ -1,0 +1,21 @@
+{
+	"description": "WarungDaring",
+	"name": "warungdaring/webapp",
+	"type": "project",
+	"homepage": "https://kafedev.com",
+	"license": "MIT",
+	"support": {
+		"source": "https://github.com/msazzuhair/warungDaring"
+	},
+	"require": {
+		"php": ">=7.1.0",
+		"guzzlehttp/guzzle": "^7.0"
+	},
+	"suggest": {
+		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
+	},
+	"require-dev": {
+		"mikey179/vfsstream": "1.1.*",
+		"phpunit/phpunit": "4.* || 5.*"
+	}
+}
