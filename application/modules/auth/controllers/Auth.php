@@ -100,13 +100,15 @@ class Auth extends MX_Controller
 			$this->data['identity'] = [
 				'name' => 'identity',
 				'id' => 'identity',
-				'type' => 'text',
+				'class' => 'form-control',
+				'type' => 'email',
 				'value' => $this->form_validation->set_value('identity'),
 			];
 
 			$this->data['password'] = [
 				'name' => 'password',
 				'id' => 'password',
+				'class' => 'form-control',
 				'type' => 'password',
 			];
 
@@ -125,7 +127,7 @@ class Auth extends MX_Controller
 		$this->ion_auth->logout();
 
 		// redirect them to the login page
-		redirect('auth/login', 'refresh');
+		redirect('', 'refresh');
 	}
 
 	/**
@@ -491,7 +493,7 @@ class Auth extends MX_Controller
 		if ($this->form_validation->run() === TRUE)
 		{
 			$email = strtolower($this->input->post('email'));
-			$identity = ($identity_column === 'email') ? $email : $this->input->post('identity');
+			$identity = ($identity_column === 'email') ? strstr($email, '@', true) : $this->input->post('identity');
 			$password = $this->input->post('password');
 
 			$additional_data = [
