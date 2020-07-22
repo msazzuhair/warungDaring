@@ -4,10 +4,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title>Detail Barang - Warung Daring</title>
+  <title>Payment - Warung Daring</title>
   <meta name="description" content="Belanja Gak Bikin Pening, Harga Miring!">
   <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
@@ -31,37 +32,29 @@
       </div>
     </div>
   </nav>
-  <main class="page product-page">
-    <section class="clean-block clean-product dark">
+  <main class="page payment-page">
+    <section class="clean-block payment-form dark">
       <div class="container">
         <div class="block-heading">
-          <h2 class="text-info">Detail Barang</h2>
+          <h2 class="text-info">Status</h2>
         </div>
-        <div class="block-content">
-          <div class="product-info">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="gallery">
-                  <div class="sp-wrap">
-                    <a href="<?= base_url($item->photo) ?>"><img class="img-fluid d-block mx-auto" src="<?= base_url($item->photo) ?>"></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="info">
-                  <h3><?= $item->name; ?></h3>
-                  <h5>Stok : <?= ($item->stock > 0) ? $item->stock : 'habis' ?></h5>
-                  <div class="price">
-                    <h3>Rp <?= number_format($item->price,2,',','.') ?></h3>
-                  </div><a class="btn btn-primary btn-lg" role="button" href="<?= site_url('barang/add_to_cart?id='.$item->id) ?>"><i class="icon-basket"></i>Add to Cart</a>
-                  <div class="summary mt-3">
-                    <?php foreach ($item->description as $p) : ?><p><?= $p ?></p><?php endforeach;?>
-                  </div>
-                </div>
-              </div>
+          <div class="products">
+            <h3 class="title">Data Pembelian</h3>
+            <div class="item">
+              <span class="price">Rp <?= number_format($item->total, 2, ',', '.') ?></span>
+              <p class="item-name">Total</p>
+              <p class="item-description">Total Pembayaran</p>
             </div>
           </div>
-        </div>
+          <div class="card-details">
+            <h3 class="title">Riwayat Pengiriman</h3>
+            <dl>
+            <?php foreach ($pengiriman as $p) : ?>
+              <dt><?= $p['status'] ?></dt>
+              <dd><?= $p['waktu'] ?></dd>
+            </dl>
+            <?php endforeach; ?>
+          </div>
       </div>
     </section>
   </main>

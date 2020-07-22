@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title>Catalog - Warung Daring</title>
+  <title>My Cart - Warung Daring</title>
   <meta name="description" content="Belanja Gak Bikin Pening, Harga Miring!">
   <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
@@ -45,17 +45,17 @@
               <div class="items">
               <?php
                 $total = 0;
-                $qty = 0;
+                $weight = 0;
                 foreach($items as $item) : 
                 $total += $item->price * $item->qty;
-                $qty += $item->qty; 
+                $weight += $item->weight * $item->qty;
               ?>
                 <div class="product">
                   <div class="row justify-content-center align-items-center">
                     <div class="col-md-3">
                       <div class="product-image"><img class="img-fluid d-block mx-auto image" src="<?= base_url($item->photo) ?>"></div>
                     </div>
-                    <div class="col-md-5 product-info"><a class="product-name" href="#"><?= $item->name ?></a>
+                    <div class="col-md-5 product-info"><a class="product-name" href="<?= site_url('barang/details?id='.$item->id) ?>"><?= $item->name ?></a>
                       <div class="product-specs">
                         <?php foreach ($item->description as $p) : ?><p class="value"><?= $p ?></p><?php endforeach; ?>
                       </div>
@@ -80,9 +80,10 @@
               <div class="summary">
                 <h3>Summary</h3>
                 <h4><span class="text">Subtotal</span><span class="price">Rp <?= number_format($total, 2, ',', '.') ?></span></h4>
-                <h4><span class="text">Discount</span><span class="price">Rp 0,00</span></h4>
-                <h4><span class="text">Shipping</span><span class="price">Rp 0,00</span></h4>
-                <h4><span class="text">Total</span><span class="price">Rp <?= number_format($total, 2, ',', '.') ?></span></h4><a class="btn btn-primary btn-block btn-lg" role="button" href="payment-page.html">Checkout</a></div>
+                <h4><span class="text">Diskon</span><span class="price">Rp 0,00</span></h4>
+                <h4><span class="text">Pengiriman</span><span class="price">Rp <?= number_format($shipping = ceil($weight/1000) * 20000, 2, ',', '.') ?></span></h4>
+                <h4><span class="text">Total</span><span class="price">Rp <?= number_format($total+$shipping, 2, ',', '.') ?></span></h4>
+                <a class="btn btn-primary btn-block btn-lg<?= $total > 0 ? '' : ' disabled' ?>" role="button" href="<?= $total > 0 ? site_url('checkout') : '' ?>">Checkout</a></div>
             </div>
           </div>
         </div>

@@ -62,6 +62,10 @@ class Barang extends MX_Controller {
 
 	public function add_to_cart()
 	{
+		if (!$this->ion_auth->logged_in())
+		{
+			redirect('auth/login', 'refresh');
+		}
 		$id = (int) $this->input->get('id', true);
 
 		if(!$data = $this->barang_model->addToCart($id))
